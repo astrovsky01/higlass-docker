@@ -82,8 +82,8 @@ RUN unzip hipiler.zip -d hipiler
 ENV WEB_APP_REPO higlass-app
 RUN wget -O higlass-app.zip https://github.com/higlass/$WEB_APP_REPO/releases/download/v<WEB_APP_VERSION>/build.zip
 RUN unzip higlass-app.zip -d higlass-app
-RUN wget -O higlass-app/hglib.min.js https://unpkg.com/higlass@<LIBRARY_VERSION>/dist/hglib.min.js
-RUN wget -O higlass-app/hglib.min.css https://unpkg.com/higlass@<LIBRARY_VERSION>/dist/hglib.css
+RUN wget -O higlass-app/hglib.min.js https://unpkg.com/higlass-it@<LIBRARY_VERSION>/dist/hglib.min.js
+RUN wget -O higlass-app/hglib.min.css https://unpkg.com/higlass-it@<LIBRARY_VERSION>/dist/hglib.css
 
 RUN wget -O higlass-app/higlass-multivec.min.js https://unpkg.com/higlass-multivec@<MULTIVEC_VERSION>/dist/higlass-multivec.min.js
 RUN wget -O higlass-app/higlass-time-interval-track.min.js https://unpkg.com/higlass-time-interval-track@<TIME_INTERVAL_TRACK_VERSION>/dist/higlass-time-interval-track.min.js
@@ -155,7 +155,8 @@ ARG WORKERS
 ENV WORKERS ${WORKERS}
 RUN echo "WORKERS: $WORKERS"
 
-RUN pip install pyppeteer
+RUN pip install pyppeteer galaxy-ie-helpers
+RUN apt install net-tools
 
 # TODO: Needs to write to logs, but running as root is risky
 # Given as list so that an extra shell does not need to be started.
