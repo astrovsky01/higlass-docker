@@ -156,7 +156,7 @@ ENV WORKERS ${WORKERS}
 RUN echo "WORKERS: $WORKERS"
 
 RUN pip install pyppeteer galaxy-ie-helpers
-RUN apt install net-tools
+RUN apt update && apt install net-tools
 
 # TODO: Needs to write to logs, but running as root is risky
 # Given as list so that an extra shell does not need to be started.
