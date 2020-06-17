@@ -158,6 +158,12 @@ RUN echo "WORKERS: $WORKERS"
 RUN pip install pyppeteer galaxy-ie-helpers
 RUN apt update && apt install net-tools
 
+
+ARG HIGLASS_USER=higlass
+RUN git clone https://github.com/pkerpedjiev/negspy.git \
+    && rsync -aP rsync://hgdownload.soe.ucsc.edu/genome/admin/exe/linux.x86_64/bedGraphToBigWig /usr/local/bin/ \
+    && rsync -aP rsync://hgdownload.soe.ucsc.edu/genome/admin/exe/linux.x86_64/bigBedToBed /usr/local/bin/ \
+    && chown -R $HIGLASS_USER:$HIGLASS_USER ./negspy /usr/local/bin/bigBedToBed /usr/local/bin/bedGraphToBigWig
 # TODO: Needs to write to logs, but running as root is risky
 # Given as list so that an extra shell does not need to be started.
 CMD ["supervisord", "-n"]
